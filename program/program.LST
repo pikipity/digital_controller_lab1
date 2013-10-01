@@ -1,0 +1,120 @@
+C51 COMPILER V8.02   PROGRAM                                                               10/01/2013 11:00:10 PAGE 1   
+
+
+C51 COMPILER V8.02, COMPILATION OF MODULE PROGRAM
+OBJECT MODULE PLACED IN program.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE program.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <reg51.h>
+   2          
+   3          #define TH1value 0x3c
+   4          #define TL1value 0xb0
+   5          #define Maxcount 20
+   6          
+   7          unsigned int time=0;
+   8          unsigned int count=0;
+   9          
+  10          //change decimal number to hex number for prepare to display
+  11          unsigned int Change10to16(unsigned int time){
+  12   1              //calculate bit
+  13   1          unsigned int time10=time/10;
+  14   1              //calculate ten
+  15   1              unsigned int time1=time%10;
+  16   1              //get the final hex number (since the position of the LED is special, ten is behind one.)
+  17   1              time=time10+time1*16;
+  18   1              return time;
+  19   1      }
+  20          
+  21          //display the time
+  22          void Display(unsigned int time){
+  23   1              //P2 is used to display.
+  24   1              P2=Change10to16(time);
+  25   1      }
+  26          
+  27          //Use timer1 to count time
+  28          //timer1 initial
+  29          //timer -> 0.01s
+  30          void init_timer1(){
+  31   1              TMOD=0x10;
+  32   1              TH1=TH1value;
+  33   1              TL1=TL1value;
+  34   1              TR1=1;
+  35   1      }
+  36          
+  37          //External int init
+  38          void init_external(){
+  39   1              IT0=1;
+  40   1              IT1=1;
+  41   1      }
+  42          
+  43          //int init
+  44          void init_int(){
+  45   1              EA=1;
+  46   1              ET1=1;
+  47   1              EX0=1;
+  48   1              EX1=1;
+  49   1      }
+  50          
+  51          main(){
+  52   1              init_timer1();
+  53   1              init_external();
+  54   1              init_int();
+  55   1              Display(time);
+C51 COMPILER V8.02   PROGRAM                                                               10/01/2013 11:00:10 PAGE 2   
+
+  56   1              while(1);
+  57   1      }
+  58          
+  59          void int_external0() interrupt 0{
+  60   1              if(TR1==1){
+  61   2                      TR1=0;
+  62   2              }else{
+  63   2                      TR1=1;
+  64   2              }
+  65   1      }
+  66          
+  67          void int_external1() interrupt 2{
+  68   1              //store TR1 station
+  69   1              unsigned int TR1store=TR1;
+  70   1              //stop timer
+  71   1              TR1=0;
+  72   1              //clear time
+  73   1              time=0;
+  74   1              //display time
+  75   1              Display(time);
+  76   1              //clear timer
+  77   1              TH1=TH1value;
+  78   1              TL1=TL1value;
+  79   1              //take TR1 back
+  80   1              TR1=TR1store;
+  81   1      }
+  82          
+  83          void int_timer1() interrupt 3{
+  84   1              if(count==Maxcount){
+  85   2                      count=0;
+  86   2                      if(time==99){
+  87   3                              time=0;
+  88   3                      }else{          
+  89   3                              time++;
+  90   3                      }
+  91   2                      Display(time);
+  92   2              }else{
+  93   2                      count++;
+  94   2              }
+  95   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    295    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      4       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

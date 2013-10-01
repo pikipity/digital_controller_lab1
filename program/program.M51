@@ -1,0 +1,218 @@
+BL51 BANKED LINKER/LOCATER V6.00                                                        10/01/2013  11:00:10  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.00, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE program.obj TO program
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  program.obj (PROGRAM)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?UIDIV)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  program (PROGRAM)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0004H     UNIT         ?DT?PROGRAM
+            DATA    000CH     0002H     UNIT         _DATA_GROUP_
+            IDATA   000EH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0003H     ABSOLUTE     
+            CODE    0006H     000CH     UNIT         ?PR?INIT_TIMER1?PROGRAM
+                    0012H     0001H                  *** GAP ***
+            CODE    0013H     0003H     ABSOLUTE     
+            CODE    0016H     0005H     UNIT         ?PR?INIT_EXTERNAL?PROGRAM
+            CODE    001BH     0003H     ABSOLUTE     
+            CODE    001EH     008CH     UNIT         ?C_C51STARTUP
+            CODE    00AAH     0063H     UNIT         ?PR?INT_TIMER1?PROGRAM
+            CODE    010DH     0056H     UNIT         ?PR?INT_EXTERNAL1?PROGRAM
+            CODE    0163H     0055H     UNIT         ?C?LIB_CODE
+            CODE    01B8H     0033H     UNIT         ?PR?_CHANGE10TO16?PROGRAM
+            CODE    01EBH     000EH     UNIT         ?PR?MAIN?PROGRAM
+            CODE    01F9H     000AH     UNIT         ?PR?_DISPLAY?PROGRAM
+            CODE    0203H     0009H     UNIT         ?PR?INIT_INT?PROGRAM
+            CODE    020CH     0009H     UNIT         ?PR?INT_EXTERNAL0?PROGRAM
+            CODE    0215H     0009H     UNIT         ?C_INITSEG
+
+
+
+OVERLAY MAP OF MODULE:   program (PROGRAM)
+
+
+SEGMENT                             DATA_GROUP 
+  +--> CALLED SEGMENT             START    LENGTH
+-------------------------------------------------
+?PR?INT_EXTERNAL1?PROGRAM         000CH    0002H
+  +--> ?PR?_DISPLAY?PROGRAM
+
+?PR?_DISPLAY?PROGRAM              -----    -----
+  +--> ?PR?_CHANGE10TO16?PROGRAM
+BL51 BANKED LINKER/LOCATER V6.00                                                      10/01/2013  11:00:10  PAGE 2
+
+
+
+*** NEW ROOT ***************************************************
+
+?PR?INT_TIMER1?PROGRAM            -----    -----
+  +--> ?PR?_DISPLAY?PROGRAM
+
+*** NEW ROOT ***************************************************
+
+?C_C51STARTUP                     -----    -----
+  +--> ?PR?MAIN?PROGRAM
+  +--> ?C_INITSEG
+
+?PR?MAIN?PROGRAM                  -----    -----
+  +--> ?PR?INIT_TIMER1?PROGRAM
+  +--> ?PR?INIT_EXTERNAL?PROGRAM
+  +--> ?PR?INIT_INT?PROGRAM
+  +--> ?PR?_DISPLAY?PROGRAM
+
+
+
+SYMBOL TABLE OF MODULE:  program (PROGRAM)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        PROGRAM
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:0016H         PUBLIC        init_external
+  D:00A0H         PUBLIC        P2
+  C:00AAH         PUBLIC        int_timer1
+  B:00A8H.7       PUBLIC        EA
+  C:01EBH         PUBLIC        main
+  D:0008H         PUBLIC        count
+  D:000AH         PUBLIC        time
+  D:0089H         PUBLIC        TMOD
+  C:01FDH         PUBLIC        _Display
+  C:020CH         PUBLIC        int_external0
+  C:010DH         PUBLIC        int_external1
+  B:00A8H.3       PUBLIC        ET1
+  B:00A8H.0       PUBLIC        EX0
+  B:0088H.0       PUBLIC        IT0
+  D:008DH         PUBLIC        TH1
+  B:00A8H.2       PUBLIC        EX1
+  B:0088H.2       PUBLIC        IT1
+  D:008BH         PUBLIC        TL1
+  C:01B8H         PUBLIC        _Change10to16
+  B:0088H.6       PUBLIC        TR1
+  C:0203H         PUBLIC        init_int
+  C:0006H         PUBLIC        init_timer1
+  -------         PROC          _CHANGE10TO16
+  D:0002H         SYMBOL        time
+  -------         DO            
+  D:0082H         SYMBOL        time10
+  D:0004H         SYMBOL        time1
+  -------         ENDDO         
+  C:01B8H         LINE#         11
+  C:01BCH         LINE#         13
+BL51 BANKED LINKER/LOCATER V6.00                                                      10/01/2013  11:00:10  PAGE 3
+
+
+  C:01C7H         LINE#         15
+  C:01D2H         LINE#         17
+  C:01E7H         LINE#         18
+  C:01EAH         LINE#         19
+  -------         ENDPROC       _CHANGE10TO16
+  C:01F9H         SYMBOL        L?0021
+  -------         PROC          L?0020
+  -------         ENDPROC       L?0020
+  C:01F9H         SYMBOL        L?0021
+  -------         PROC          _DISPLAY
+  D:0006H         SYMBOL        time
+  C:01FDH         LINE#         22
+  C:01FDH         LINE#         24
+  C:0202H         LINE#         25
+  -------         ENDPROC       _DISPLAY
+  -------         PROC          INIT_TIMER1
+  C:0006H         LINE#         30
+  C:0006H         LINE#         31
+  C:0009H         LINE#         32
+  C:000CH         LINE#         33
+  C:000FH         LINE#         34
+  C:0011H         LINE#         35
+  -------         ENDPROC       INIT_TIMER1
+  -------         PROC          INIT_EXTERNAL
+  C:0016H         LINE#         38
+  C:0016H         LINE#         39
+  C:0018H         LINE#         40
+  C:001AH         LINE#         41
+  -------         ENDPROC       INIT_EXTERNAL
+  -------         PROC          INIT_INT
+  C:0203H         LINE#         44
+  C:0203H         LINE#         45
+  C:0205H         LINE#         46
+  C:0207H         LINE#         47
+  C:0209H         LINE#         48
+  C:020BH         LINE#         49
+  -------         ENDPROC       INIT_INT
+  -------         PROC          MAIN
+  C:01EBH         LINE#         51
+  C:01EBH         LINE#         52
+  C:01EEH         LINE#         53
+  C:01F1H         LINE#         54
+  C:01F4H         LINE#         55
+  C:01F7H         LINE#         56
+  -------         ENDPROC       MAIN
+  -------         PROC          INT_EXTERNAL0
+  C:020CH         LINE#         59
+  C:020CH         LINE#         60
+  C:020FH         LINE#         61
+  C:0211H         LINE#         62
+  C:0212H         LINE#         63
+  C:0214H         LINE#         64
+  C:0214H         LINE#         65
+  -------         ENDPROC       INT_EXTERNAL0
+  -------         PROC          INT_EXTERNAL1
+  -------         DO            
+  D:000CH         SYMBOL        TR1store
+BL51 BANKED LINKER/LOCATER V6.00                                                      10/01/2013  11:00:10  PAGE 4
+
+
+  -------         ENDDO         
+  C:010DH         LINE#         67
+  C:0128H         LINE#         69
+  C:0131H         LINE#         71
+  C:0133H         LINE#         73
+  C:0139H         LINE#         75
+  C:013CH         LINE#         77
+  C:013FH         LINE#         78
+  C:0142H         LINE#         80
+  C:014AH         LINE#         81
+  -------         ENDPROC       INT_EXTERNAL1
+  -------         PROC          INT_TIMER1
+  C:00AAH         LINE#         83
+  C:00C5H         LINE#         84
+  C:00CDH         LINE#         85
+  C:00D1H         LINE#         86
+  C:00D9H         LINE#         87
+  C:00DDH         LINE#         88
+  C:00DFH         LINE#         89
+  C:00E7H         LINE#         90
+  C:00E7H         LINE#         91
+  C:00EAH         LINE#         92
+  C:00ECH         LINE#         93
+  C:00F4H         LINE#         94
+  C:00F4H         LINE#         95
+  -------         ENDPROC       INT_TIMER1
+  -------         ENDMOD        PROGRAM
+
+  -------         MODULE        ?C?UIDIV
+  C:0163H         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+Program Size: data=15.0 xdata=0 code=541
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
