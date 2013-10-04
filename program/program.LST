@@ -1,4 +1,4 @@
-C51 COMPILER V8.02   PROGRAM                                                               10/01/2013 11:00:10 PAGE 1   
+C51 COMPILER V8.02   PROGRAM                                                               10/04/2013 20:26:11 PAGE 1   
 
 
 C51 COMPILER V8.02, COMPILATION OF MODULE PROGRAM
@@ -62,56 +62,48 @@ line level    source
   53   1              init_external();
   54   1              init_int();
   55   1              Display(time);
-C51 COMPILER V8.02   PROGRAM                                                               10/01/2013 11:00:10 PAGE 2   
+C51 COMPILER V8.02   PROGRAM                                                               10/04/2013 20:26:11 PAGE 2   
 
   56   1              while(1);
   57   1      }
   58          
   59          void int_external0() interrupt 0{
-  60   1              if(TR1==1){
-  61   2                      TR1=0;
-  62   2              }else{
-  63   2                      TR1=1;
-  64   2              }
-  65   1      }
-  66          
-  67          void int_external1() interrupt 2{
-  68   1              //store TR1 station
-  69   1              unsigned int TR1store=TR1;
-  70   1              //stop timer
-  71   1              TR1=0;
-  72   1              //clear time
-  73   1              time=0;
-  74   1              //display time
-  75   1              Display(time);
-  76   1              //clear timer
-  77   1              TH1=TH1value;
-  78   1              TL1=TL1value;
-  79   1              //take TR1 back
-  80   1              TR1=TR1store;
-  81   1      }
-  82          
-  83          void int_timer1() interrupt 3{
-  84   1              if(count==Maxcount){
-  85   2                      count=0;
-  86   2                      if(time==99){
-  87   3                              time=0;
-  88   3                      }else{          
-  89   3                              time++;
-  90   3                      }
-  91   2                      Display(time);
-  92   2              }else{
-  93   2                      count++;
-  94   2              }
-  95   1      }
+  60   1              TR1=~TR1;
+  61   1      }
+  62          
+  63          void int_external1() interrupt 2{
+  64   1              if(!TR1){
+  65   2                      //clear time
+  66   2                      time=0;
+  67   2                      //display time
+  68   2                      Display(time);
+  69   2                      //clear timer
+  70   2                      TH1=TH1value;
+  71   2                      TL1=TL1value;
+  72   2              }
+  73   1      }
+  74          
+  75          void int_timer1() interrupt 3{
+  76   1              if(count==Maxcount){
+  77   2                      count=0;
+  78   2                      if(time==99){
+  79   3                              time=0;
+  80   3                      }else{          
+  81   3                              time++;
+  82   3                      }
+  83   2                      Display(time);
+  84   2              }else{
+  85   2                      count++;
+  86   2              }
+  87   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    295    ----
+   CODE SIZE        =    273    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =      4       2
+   DATA SIZE        =      4    ----
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.

@@ -57,27 +57,19 @@ main(){
 }
 
 void int_external0() interrupt 0{
-	if(TR1==1){
-		TR1=0;
-	}else{
-		TR1=1;
-	}
+	TR1=~TR1;
 }
 
 void int_external1() interrupt 2{
-	//store TR1 station
-	unsigned int TR1store=TR1;
-	//stop timer
-	TR1=0;
-	//clear time
-	time=0;
-	//display time
-	Display(time);
-	//clear timer
-	TH1=TH1value;
-	TL1=TL1value;
-	//take TR1 back
-	TR1=TR1store;
+	if(!TR1){
+		//clear time
+		time=0;
+		//display time
+		Display(time);
+		//clear timer
+		TH1=TH1value;
+		TL1=TL1value;
+	}
 }
 
 void int_timer1() interrupt 3{

@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.00                                                        10/01/2013  11:00:10  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.00                                                        10/04/2013  20:26:11  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.00, INVOKED BY:
@@ -24,8 +24,7 @@ LINK MAP OF MODULE:  program (PROGRAM)
             * * * * * * *   D A T A   M E M O R Y   * * * * * * *
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
             DATA    0008H     0004H     UNIT         ?DT?PROGRAM
-            DATA    000CH     0002H     UNIT         _DATA_GROUP_
-            IDATA   000EH     0001H     UNIT         ?STACK
+            IDATA   000CH     0001H     UNIT         ?STACK
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
             CODE    0000H     0003H     ABSOLUTE     
@@ -37,44 +36,44 @@ LINK MAP OF MODULE:  program (PROGRAM)
             CODE    001BH     0003H     ABSOLUTE     
             CODE    001EH     008CH     UNIT         ?C_C51STARTUP
             CODE    00AAH     0063H     UNIT         ?PR?INT_TIMER1?PROGRAM
-            CODE    010DH     0056H     UNIT         ?PR?INT_EXTERNAL1?PROGRAM
-            CODE    0163H     0055H     UNIT         ?C?LIB_CODE
-            CODE    01B8H     0033H     UNIT         ?PR?_CHANGE10TO16?PROGRAM
-            CODE    01EBH     000EH     UNIT         ?PR?MAIN?PROGRAM
-            CODE    01F9H     000AH     UNIT         ?PR?_DISPLAY?PROGRAM
-            CODE    0203H     0009H     UNIT         ?PR?INIT_INT?PROGRAM
-            CODE    020CH     0009H     UNIT         ?PR?INT_EXTERNAL0?PROGRAM
-            CODE    0215H     0009H     UNIT         ?C_INITSEG
+            CODE    010DH     0055H     UNIT         ?C?LIB_CODE
+            CODE    0162H     0046H     UNIT         ?PR?INT_EXTERNAL1?PROGRAM
+            CODE    01A8H     0033H     UNIT         ?PR?_CHANGE10TO16?PROGRAM
+            CODE    01DBH     000EH     UNIT         ?PR?MAIN?PROGRAM
+            CODE    01E9H     000AH     UNIT         ?PR?_DISPLAY?PROGRAM
+            CODE    01F3H     0009H     UNIT         ?PR?INIT_INT?PROGRAM
+            CODE    01FCH     0009H     UNIT         ?C_INITSEG
+            CODE    0205H     0003H     UNIT         ?PR?INT_EXTERNAL0?PROGRAM
 
 
 
 OVERLAY MAP OF MODULE:   program (PROGRAM)
 
 
-SEGMENT                             DATA_GROUP 
-  +--> CALLED SEGMENT             START    LENGTH
--------------------------------------------------
-?PR?INT_EXTERNAL1?PROGRAM         000CH    0002H
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?PR?INT_EXTERNAL1?PROGRAM
   +--> ?PR?_DISPLAY?PROGRAM
 
-?PR?_DISPLAY?PROGRAM              -----    -----
+?PR?_DISPLAY?PROGRAM
   +--> ?PR?_CHANGE10TO16?PROGRAM
-BL51 BANKED LINKER/LOCATER V6.00                                                      10/01/2013  11:00:10  PAGE 2
 
+BL51 BANKED LINKER/LOCATER V6.00                                                      10/04/2013  20:26:11  PAGE 2
 
 
 *** NEW ROOT ***************************************************
 
-?PR?INT_TIMER1?PROGRAM            -----    -----
+?PR?INT_TIMER1?PROGRAM
   +--> ?PR?_DISPLAY?PROGRAM
 
 *** NEW ROOT ***************************************************
 
-?C_C51STARTUP                     -----    -----
+?C_C51STARTUP
   +--> ?PR?MAIN?PROGRAM
   +--> ?C_INITSEG
 
-?PR?MAIN?PROGRAM                  -----    -----
+?PR?MAIN?PROGRAM
   +--> ?PR?INIT_TIMER1?PROGRAM
   +--> ?PR?INIT_EXTERNAL?PROGRAM
   +--> ?PR?INIT_INT?PROGRAM
@@ -93,13 +92,13 @@ SYMBOL TABLE OF MODULE:  program (PROGRAM)
   D:00A0H         PUBLIC        P2
   C:00AAH         PUBLIC        int_timer1
   B:00A8H.7       PUBLIC        EA
-  C:01EBH         PUBLIC        main
+  C:01DBH         PUBLIC        main
   D:0008H         PUBLIC        count
   D:000AH         PUBLIC        time
   D:0089H         PUBLIC        TMOD
-  C:01FDH         PUBLIC        _Display
-  C:020CH         PUBLIC        int_external0
-  C:010DH         PUBLIC        int_external1
+  C:01EDH         PUBLIC        _Display
+  C:0205H         PUBLIC        int_external0
+  C:0162H         PUBLIC        int_external1
   B:00A8H.3       PUBLIC        ET1
   B:00A8H.0       PUBLIC        EX0
   B:0088H.0       PUBLIC        IT0
@@ -107,9 +106,9 @@ SYMBOL TABLE OF MODULE:  program (PROGRAM)
   B:00A8H.2       PUBLIC        EX1
   B:0088H.2       PUBLIC        IT1
   D:008BH         PUBLIC        TL1
-  C:01B8H         PUBLIC        _Change10to16
+  C:01A8H         PUBLIC        _Change10to16
   B:0088H.6       PUBLIC        TR1
-  C:0203H         PUBLIC        init_int
+  C:01F3H         PUBLIC        init_int
   C:0006H         PUBLIC        init_timer1
   -------         PROC          _CHANGE10TO16
   D:0002H         SYMBOL        time
@@ -117,25 +116,25 @@ SYMBOL TABLE OF MODULE:  program (PROGRAM)
   D:0082H         SYMBOL        time10
   D:0004H         SYMBOL        time1
   -------         ENDDO         
-  C:01B8H         LINE#         11
-  C:01BCH         LINE#         13
-BL51 BANKED LINKER/LOCATER V6.00                                                      10/01/2013  11:00:10  PAGE 3
+  C:01A8H         LINE#         11
+  C:01ACH         LINE#         13
+  C:01B7H         LINE#         15
+BL51 BANKED LINKER/LOCATER V6.00                                                      10/04/2013  20:26:11  PAGE 3
 
 
-  C:01C7H         LINE#         15
-  C:01D2H         LINE#         17
-  C:01E7H         LINE#         18
-  C:01EAH         LINE#         19
+  C:01C2H         LINE#         17
+  C:01D7H         LINE#         18
+  C:01DAH         LINE#         19
   -------         ENDPROC       _CHANGE10TO16
-  C:01F9H         SYMBOL        L?0021
-  -------         PROC          L?0020
-  -------         ENDPROC       L?0020
-  C:01F9H         SYMBOL        L?0021
+  C:01E9H         SYMBOL        L?0020
+  -------         PROC          L?0019
+  -------         ENDPROC       L?0019
+  C:01E9H         SYMBOL        L?0020
   -------         PROC          _DISPLAY
   D:0006H         SYMBOL        time
-  C:01FDH         LINE#         22
-  C:01FDH         LINE#         24
-  C:0202H         LINE#         25
+  C:01EDH         LINE#         22
+  C:01EDH         LINE#         24
+  C:01F2H         LINE#         25
   -------         ENDPROC       _DISPLAY
   -------         PROC          INIT_TIMER1
   C:0006H         LINE#         30
@@ -152,67 +151,59 @@ SYMBOL TABLE OF MODULE:  program (PROGRAM)
   C:001AH         LINE#         41
   -------         ENDPROC       INIT_EXTERNAL
   -------         PROC          INIT_INT
-  C:0203H         LINE#         44
-  C:0203H         LINE#         45
-  C:0205H         LINE#         46
-  C:0207H         LINE#         47
-  C:0209H         LINE#         48
-  C:020BH         LINE#         49
+  C:01F3H         LINE#         44
+  C:01F3H         LINE#         45
+  C:01F5H         LINE#         46
+  C:01F7H         LINE#         47
+  C:01F9H         LINE#         48
+  C:01FBH         LINE#         49
   -------         ENDPROC       INIT_INT
   -------         PROC          MAIN
-  C:01EBH         LINE#         51
-  C:01EBH         LINE#         52
-  C:01EEH         LINE#         53
-  C:01F1H         LINE#         54
-  C:01F4H         LINE#         55
-  C:01F7H         LINE#         56
+  C:01DBH         LINE#         51
+  C:01DBH         LINE#         52
+  C:01DEH         LINE#         53
+  C:01E1H         LINE#         54
+  C:01E4H         LINE#         55
+  C:01E7H         LINE#         56
   -------         ENDPROC       MAIN
   -------         PROC          INT_EXTERNAL0
-  C:020CH         LINE#         59
-  C:020CH         LINE#         60
-  C:020FH         LINE#         61
-  C:0211H         LINE#         62
-  C:0212H         LINE#         63
-  C:0214H         LINE#         64
-  C:0214H         LINE#         65
+  C:0205H         LINE#         59
+  C:0205H         LINE#         60
+  C:0207H         LINE#         61
   -------         ENDPROC       INT_EXTERNAL0
   -------         PROC          INT_EXTERNAL1
-  -------         DO            
-  D:000CH         SYMBOL        TR1store
-BL51 BANKED LINKER/LOCATER V6.00                                                      10/01/2013  11:00:10  PAGE 4
+  C:0162H         LINE#         63
+  C:017DH         LINE#         64
+  C:0180H         LINE#         66
+  C:0186H         LINE#         68
+  C:0189H         LINE#         70
+  C:018CH         LINE#         71
+  C:018FH         LINE#         72
+BL51 BANKED LINKER/LOCATER V6.00                                                      10/04/2013  20:26:11  PAGE 4
 
 
-  -------         ENDDO         
-  C:010DH         LINE#         67
-  C:0128H         LINE#         69
-  C:0131H         LINE#         71
-  C:0133H         LINE#         73
-  C:0139H         LINE#         75
-  C:013CH         LINE#         77
-  C:013FH         LINE#         78
-  C:0142H         LINE#         80
-  C:014AH         LINE#         81
+  C:018FH         LINE#         73
   -------         ENDPROC       INT_EXTERNAL1
   -------         PROC          INT_TIMER1
-  C:00AAH         LINE#         83
-  C:00C5H         LINE#         84
-  C:00CDH         LINE#         85
-  C:00D1H         LINE#         86
-  C:00D9H         LINE#         87
-  C:00DDH         LINE#         88
-  C:00DFH         LINE#         89
-  C:00E7H         LINE#         90
-  C:00E7H         LINE#         91
-  C:00EAH         LINE#         92
-  C:00ECH         LINE#         93
-  C:00F4H         LINE#         94
-  C:00F4H         LINE#         95
+  C:00AAH         LINE#         75
+  C:00C5H         LINE#         76
+  C:00CDH         LINE#         77
+  C:00D1H         LINE#         78
+  C:00D9H         LINE#         79
+  C:00DDH         LINE#         80
+  C:00DFH         LINE#         81
+  C:00E7H         LINE#         82
+  C:00E7H         LINE#         83
+  C:00EAH         LINE#         84
+  C:00ECH         LINE#         85
+  C:00F4H         LINE#         86
+  C:00F4H         LINE#         87
   -------         ENDPROC       INT_TIMER1
   -------         ENDMOD        PROGRAM
 
   -------         MODULE        ?C?UIDIV
-  C:0163H         PUBLIC        ?C?UIDIV
+  C:010DH         PUBLIC        ?C?UIDIV
   -------         ENDMOD        ?C?UIDIV
 
-Program Size: data=15.0 xdata=0 code=541
+Program Size: data=13.0 xdata=0 code=519
 LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
