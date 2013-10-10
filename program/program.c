@@ -1,25 +1,25 @@
-#include <reg51.h>
+#include <reg52.h>
 
-#define TH1value 0x3c
-#define TL1value 0xb0
-#define Maxcount 20
+#define TH1value 0x63
+#define TL1value 0xC0
+#define Maxcount 50
 
-unsigned int time=0;
-unsigned int count=0;
+unsigned char time=0;
+unsigned char count=0;
 
 //change decimal number to hex number for prepare to display
-unsigned int Change10to16(unsigned int time){
+unsigned char Change10to16(unsigned char time){
 	//calculate bit
-    unsigned int time10=time/10;
+    unsigned char time10=time/10;
 	//calculate ten
-	unsigned int time1=time%10;
+	unsigned char time1=time%10;
 	//get the final hex number (since the position of the LED is special, ten is behind one.)
 	time=time10+time1*16;
 	return time;
 }
 
 //display the time
-void Display(unsigned int time){
+void Display(unsigned char time){
 	//P2 is used to display.
 	P2=Change10to16(time);
 }
@@ -52,8 +52,17 @@ main(){
 	init_timer1();
 	init_external();
 	init_int();
-	Display(time);
-	while(1);
+	while(1){
+		Display(time);
+		if(count==Maxcount){
+			count=0;
+			if(time==99){
+				time=0;
+			}else{		
+				time++;
+		    }
+	    }
+	}
 }
 
 void int_external0() interrupt 0{
@@ -73,15 +82,7 @@ void int_external1() interrupt 2{
 }
 
 void int_timer1() interrupt 3{
-	if(count==Maxcount){
-		count=0;
-		if(time==99){
-			time=0;
-		}else{		
-			time++;
-		}
-		Display(time);
-	}else{
-		count++;
-	}
+	count++;
+	TH1=TH1value;
+	TL1=TL1value;
 }
