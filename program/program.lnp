@@ -1,2 +1,3 @@
 "program.obj" 
 TO "program" 
+RAMSIZE(256) 

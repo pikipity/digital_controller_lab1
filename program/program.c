@@ -48,7 +48,7 @@ void init_int(){
 	EX1=1;
 }
 
-main(){
+void main(){
 	init_timer1();
 	init_external();
 	init_int();
